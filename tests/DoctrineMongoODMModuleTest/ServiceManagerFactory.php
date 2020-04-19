@@ -19,12 +19,7 @@ class ServiceManagerFactory
      */
     public static function getConfiguration()
     {
-        $r = new \ReflectionClass(Application::class);
-        $requiredParams = $r->getConstructor()->getNumberOfRequiredParameters();
-
-        $configFile = $requiredParams == 1 ? 'TestConfigurationV3.php' : 'TestConfigurationV2.php';
-
-        return include __DIR__ . '/../' . $configFile;
+        return include __DIR__ . '/../application.config.php';
     }
 
     /**
