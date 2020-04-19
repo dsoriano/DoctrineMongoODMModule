@@ -17,20 +17,6 @@ use Zend\ServiceManager\ServiceManager;
 
 final class ConfigurationFactoryTest extends AbstractTest
 {
-    public function testRetryConnectValueIsSetFromConfigurationOptions()
-    {
-        $config = $this->getDocumentManager()->getConfiguration();
-
-        $this->assertSame(123, $config->getRetryConnect());
-    }
-
-    public function testRetryQueryValueIsSetFromConfigurationOptions()
-    {
-        $config = $this->getDocumentManager()->getConfiguration();
-
-        $this->assertSame(456, $config->getRetryQuery());
-    }
-
     public function testCreation()
     {
         $serviceLocator = new ServiceManager;
@@ -66,11 +52,11 @@ final class ConfigurationFactoryTest extends AbstractTest
                             'metadata_cache' => 'stubbed_metadatacache',
                             'driver' => 'stubbed_driver',
 
-                            'generate_proxies' => $proxyGenerate = false,
+                            'generate_proxies' => $proxyGenerate = Configuration::AUTOGENERATE_FILE_NOT_EXISTS,
                             'proxy_dir' => $proxyDir = 'dir/proxy',
                             'proxy_namespace' => $proxyNamespace = 'ns\proxy',
 
-                            'generate_hydrators' => $hydratorGenerate = true,
+                            'generate_hydrators' => $hydratorGenerate = Configuration::AUTOGENERATE_FILE_NOT_EXISTS,
                             'hydrator_dir' => $hydratorDir = 'dir/hydrator',
                             'hydrator_namespace' => $hydratorNamespace = 'ns\hydrator',
 
@@ -97,16 +83,16 @@ final class ConfigurationFactoryTest extends AbstractTest
         $config = $factory->createService($serviceLocator);
 
         self::assertInstanceOf(Configuration::class, $config);
-        self::assertTrue(is_callable($config->getLoggerCallable()));
+//        self::assertTrue(is_callable($config->getLoggerCallable()));
 
         self::assertSame($metadataCache, $config->getMetadataCacheImpl());
         self::assertSame($mappingDriver, $config->getMetadataDriverImpl());
 
-        self::assertSame(AbstractProxyFactory::AUTOGENERATE_NEVER, $config->getAutoGenerateProxyClasses());
+        self::assertSame(Configuration::AUTOGENERATE_FILE_NOT_EXISTS, $config->getAutoGenerateProxyClasses());
         self::assertSame($proxyDir, $config->getProxyDir());
         self::assertSame($proxyNamespace, $config->getProxyNamespace());
 
-        self::assertTrue($config->getAutoGenerateHydratorClasses());
+        self::assertSame(Configuration::AUTOGENERATE_FILE_NOT_EXISTS, $config->getAutoGenerateHydratorClasses());
         self::assertSame($hydratorDir, $config->getHydratorDir());
         self::assertSame($hydratorNamespace, $config->getHydratorNamespace());
 

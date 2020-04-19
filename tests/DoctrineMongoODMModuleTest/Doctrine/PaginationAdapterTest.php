@@ -24,11 +24,8 @@ class PaginationAdapterTest extends AbstractTest
     protected function getPaginationAdapter()
     {
         $documentManager = $this->getDocumentManager();
-
-        $cursor = $documentManager->createQueryBuilder(get_class(new Simple()))->getQuery()->execute();
-        $cursor->sort(['name' => 'asc']);
-
-        return new DoctrinePaginator($cursor);
+        $iterator = $documentManager->createQueryBuilder(get_class(new Simple()))->sort('name', 1)->getQuery()->execute();
+        return new DoctrinePaginator($iterator);
     }
 
     public function setup()
@@ -49,19 +46,6 @@ class PaginationAdapterTest extends AbstractTest
     public function testItemCount()
     {
         $paginationAdapter = $this->getPaginationAdapter();
-        $this->assertEquals($this->numberOfItems, $paginationAdapter->count());
-    }
-
-    public function testItemCountWithEagerCursor()
-    {
-        $documentManager = $this->getDocumentManager();
-
-        // Prepare an adapter with a limit already set. EagerCursors don't support $foundOnly = false
-        $cursor = $documentManager->createQueryBuilder(Simple::class)->eagerCursor(true)->getQuery()->execute();
-        $cursor->sort(['name' => 'asc'])->limit(5);
-
-        $paginationAdapter = new DoctrinePaginator($cursor);
-
         $this->assertEquals($this->numberOfItems, $paginationAdapter->count());
     }
 

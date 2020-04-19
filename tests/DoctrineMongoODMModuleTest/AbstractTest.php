@@ -23,10 +23,13 @@ abstract class AbstractTest extends TestCase
     public function tearDown()
     {
         try {
-            $connection = $this->getDocumentManager()->getConnection();
-            $collections = $connection->selectDatabase('doctrineMongoODMModuleTest')->listCollections();
+            $client = $this->getDocumentManager()->getClient();
+            $collections = $client->selectDatabase('doctrineMongoODMModuleTest')->listCollections();
             foreach ($collections as $collection) {
-                $collection->remove([], ['w' => 1]);
+                if ($collection->getName() === 'system.indexes') {
+                    continue;
+                }
+                $client->selectCollection('doctrineMongoODMModuleTest', $collection->getName())->drop();
             }
         } catch (\MongoException $e) {
         }

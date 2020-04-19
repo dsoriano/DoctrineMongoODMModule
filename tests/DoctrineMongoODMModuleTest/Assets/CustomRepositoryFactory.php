@@ -3,6 +3,7 @@ namespace DoctrineMongoODMModuleTest\Assets;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Repository\RepositoryFactory;
+use Doctrine\Persistence\ObjectRepository;
 
 /**
  * Class CustomRepositoryFactory
@@ -18,7 +19,7 @@ class CustomRepositoryFactory implements RepositoryFactory
      *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
-    public function getRepository(DocumentManager $documentManager, $documentName)
+    public function getRepository(DocumentManager $documentManager, string $documentName) : ObjectRepository
     {
     }
 }

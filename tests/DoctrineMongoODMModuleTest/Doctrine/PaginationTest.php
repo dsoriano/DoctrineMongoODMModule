@@ -19,8 +19,7 @@ class PaginationTest extends AbstractTest
     {
         $documentManager = $this->getDocumentManager();
 
-        $cursor = $documentManager->createQueryBuilder(get_class(new Simple()))->getQuery()->execute();
-        $cursor->sort(['Name', 'asc']);
+        $cursor = $documentManager->createQueryBuilder(get_class(new Simple()))->sort('name',1)->getQuery()->execute();
 
         return new DoctrinePaginator($cursor);
     }
