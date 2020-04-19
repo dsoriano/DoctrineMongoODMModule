@@ -1,6 +1,7 @@
 <?php
 namespace DoctrineMongoODMModule\Service;
 
+use Doctrine\ODM\MongoDB\Mapping\MappingException;
 use DoctrineMongoODMModule\Options;
 use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\Types\Type;
@@ -21,6 +22,7 @@ class ConfigurationFactory extends AbstractFactory
      * {@inheritDoc}
      *
      * @return Configuration
+     * @throws MappingException
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
