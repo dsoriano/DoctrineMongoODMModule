@@ -1,7 +1,6 @@
 <?php
 namespace DoctrineMongoODMModule\Options;
 
-use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ODM\MongoDB\Configuration as MongoDBConfiguration;
 use DoctrineMongoODMModule\Logging\Logger;
 use Zend\Stdlib\AbstractOptions;
