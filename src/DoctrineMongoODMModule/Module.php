@@ -4,6 +4,7 @@ namespace DoctrineMongoODMModule;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ODM\MongoDB\Tools\Console\Command;
+use Doctrine\ODM\MongoDB\Tools\Console\Helper\DocumentManagerHelper;
 use DoctrineModule\Service as CommonService;
 use DoctrineMongoODMModule\Service as ODMService;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -90,7 +91,7 @@ class Module implements
         $documentManagerName = ! empty($documentManagerName) ? $documentManagerName : 'odm_default';
 
         $documentManager = $event->getParam('ServiceManager')->get('doctrine.documentmanager.' . $documentManagerName);
-        $documentHelper  = new \Doctrine\ODM\MongoDB\Tools\Console\Helper\DocumentManagerHelper($documentManager);
+        $documentHelper  = new DocumentManagerHelper($documentManager);
         $cli->getHelperSet()->set($documentHelper, 'dm');
     }
 

@@ -2,6 +2,7 @@
 
 namespace DoctrineMongoODMModule\Service;
 
+use Doctrine\ODM\MongoDB\Configuration;
 use DoctrineMongoODMModule\Collector\MongoLoggerCollector;
 use DoctrineMongoODMModule\Logging\DebugStack;
 use DoctrineMongoODMModule\Logging\LoggerChain;
@@ -46,7 +47,7 @@ class MongoLoggerCollectorFactory extends AbstractFactory
             $debugStackLogger = new DebugStack();
         }
 
-        /** @var $options \Doctrine\ODM\MongoDB\Configuration */
+        /** @var $options Configuration */
         $configuration = $container->get($options->getConfiguration());
 
         if (null !== $configuration->getLoggerCallable()) {

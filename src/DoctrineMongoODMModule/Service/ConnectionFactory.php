@@ -1,7 +1,9 @@
 <?php
 namespace DoctrineMongoODMModule\Service;
 
+use Doctrine\Common\EventManager;
 use Doctrine\MongoDB\Connection;
+use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use DoctrineMongoODMModule\Options;
 use Interop\Container\ContainerInterface;
@@ -60,7 +62,7 @@ class ConnectionFactory extends AbstractFactory
             }
         }
 
-        /** @var $configuration \Doctrine\ODM\MongoDB\Configuration */
+        /** @var $configuration Configuration */
         $configuration = $container->get('doctrine.configuration.' . $this->getName());
 
         // Set defaultDB to $dbName, if it's not defined in configuration
@@ -68,7 +70,7 @@ class ConnectionFactory extends AbstractFactory
             $configuration->setDefaultDB($dbName);
         }
 
-        /** @var $configuration \Doctrine\Common\EventManager */
+        /** @var $configuration EventManager */
         $eventManager = $container->get('doctrine.eventmanager.' . $this->getName());
 
 //        return new Connection($connectionString, $options->getOptions(), $configuration, $eventManager);

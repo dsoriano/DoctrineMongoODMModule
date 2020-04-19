@@ -76,7 +76,7 @@ class Connection extends AbstractOptions
      *
      * @param string $server
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setServer($server)
     {
@@ -97,7 +97,7 @@ class Connection extends AbstractOptions
      *
      * @param string $port
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setPort($port)
     {
@@ -118,7 +118,7 @@ class Connection extends AbstractOptions
      *
      * @param string $user
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setUser($user)
     {
@@ -139,7 +139,7 @@ class Connection extends AbstractOptions
      *
      * @param string $password
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setPassword($password)
     {
@@ -160,7 +160,7 @@ class Connection extends AbstractOptions
      *
      * @param string $dbname
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setDbname($dbname)
     {
@@ -181,7 +181,7 @@ class Connection extends AbstractOptions
      *
      * @param string $connectionString
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setConnectionString($connectionString)
     {
@@ -202,7 +202,7 @@ class Connection extends AbstractOptions
      *
      * @param array $options
      *
-     * @return \DoctrineMongoODMModule\Options\Connection
+     * @return Connection
      */
     public function setOptions($options)
     {

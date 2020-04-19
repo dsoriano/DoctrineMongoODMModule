@@ -3,6 +3,7 @@ namespace DoctrineMongoODMModule\Options;
 
 use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ODM\MongoDB\Configuration as MongoDBConfiguration;
+use DoctrineMongoODMModule\Logging\Logger;
 use Zend\Stdlib\AbstractOptions;
 
 /**
@@ -71,7 +72,7 @@ class Configuration extends AbstractOptions
      *
      * @var int
      */
-    protected $generatePersistentCollections = \Doctrine\ODM\MongoDB\Configuration::AUTOGENERATE_ALWAYS;
+    protected $generatePersistentCollections = MongoDBConfiguration::AUTOGENERATE_ALWAYS;
 
     /**
      * Persistent collection directory.
@@ -123,7 +124,7 @@ class Configuration extends AbstractOptions
 
     /**
      *
-     * @var \DoctrineMongoODMModule\Logging\Logger
+     * @var Logger
      */
     protected $logger;
 
@@ -280,7 +281,7 @@ class Configuration extends AbstractOptions
     /**
      *
      * @param boolean|int $generateHydrators
-     * @return \DoctrineMongoODMModule\Options\Configuration
+     * @return Configuration
      */
     public function setGenerateHydrators($generateHydrators)
     {
@@ -475,7 +476,7 @@ class Configuration extends AbstractOptions
 
     /**
      *
-     * @param \DoctrineMongoODMModule\Logging\Logger $logger
+     * @param Logger $logger
      * @return $this
      */
     public function setLogger($logger)
@@ -485,7 +486,7 @@ class Configuration extends AbstractOptions
     }
 
     /**
-     * @return \DoctrineMongoODMModule\Logging\Logger
+     * @return Logger
      */
     public function getLogger()
     {
@@ -570,7 +571,7 @@ class Configuration extends AbstractOptions
 
     /**
      * @param string $repositoryFactory
-     * @return \DoctrineMongoODMModule\Options\Configuration
+     * @return Configuration
      */
     public function setRepositoryFactory($repositoryFactory)
     {

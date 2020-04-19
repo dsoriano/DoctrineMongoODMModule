@@ -43,7 +43,7 @@ class DocumentManager extends AbstractOptions
     /**
      *
      * @param type $configuration
-     * @return \DoctrineMongoODMModule\Options\DocumentManager
+     * @return DocumentManager
      */
     public function setConfiguration($configuration)
     {
@@ -62,7 +62,7 @@ class DocumentManager extends AbstractOptions
     /**
      *
      * @param type $connection
-     * @return \DoctrineMongoODMModule\Options\DocumentManager
+     * @return DocumentManager
      */
     public function setConnection($connection)
     {
@@ -90,7 +90,7 @@ class DocumentManager extends AbstractOptions
     /**
      *
      * @param type $eventManager
-     * @return \DoctrineMongoODMModule\Options\DocumentManager
+     * @return DocumentManager
      */
     public function setEventManager($eventManager)
     {
