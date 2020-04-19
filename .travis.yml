@@ -22,6 +22,7 @@ before_install:
   - travis_retry composer self-update
 
 install:
+  - yes '' | pecl -q install -f mongodb
   - travis_retry composer install $COMPOSER_ARGS
   - composer show
   - if ! nc -z localhost 27017; then sudo service mongod start; fi
