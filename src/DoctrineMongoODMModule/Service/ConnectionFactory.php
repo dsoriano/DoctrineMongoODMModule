@@ -1,8 +1,6 @@
 <?php
 namespace DoctrineMongoODMModule\Service;
 
-use Doctrine\Common\EventManager;
-use Doctrine\MongoDB\Connection;
 use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use DoctrineMongoODMModule\Options;
@@ -70,10 +68,6 @@ class ConnectionFactory extends AbstractFactory
             $configuration->setDefaultDB($dbName);
         }
 
-        /** @var $configuration EventManager */
-        $eventManager = $container->get('doctrine.eventmanager.' . $this->getName());
-
-//        return new Connection($connectionString, $options->getOptions(), $configuration, $eventManager);
         return new Client($connectionString, [], ['typeMap' => DocumentManager::CLIENT_TYPEMAP]);
     }
 
