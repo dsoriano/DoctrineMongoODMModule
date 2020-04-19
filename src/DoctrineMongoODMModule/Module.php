@@ -60,8 +60,8 @@ class Module implements
     {
         $commands = [
             new Command\QueryCommand(),
-            new Command\GenerateDocumentsCommand(),
-            new Command\GenerateRepositoriesCommand(),
+//            new Command\GenerateDocumentsCommand(),
+//            new Command\GenerateRepositoriesCommand(),
             new Command\GenerateProxiesCommand(),
             new Command\GenerateHydratorsCommand(),
             new Command\GeneratePersistentCollectionsCommand(),

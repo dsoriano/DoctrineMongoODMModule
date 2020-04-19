@@ -1,5 +1,4 @@
 <?php
-use Doctrine\Common\Proxy\AbstractProxyFactory;
 use Doctrine\ODM\MongoDB\Configuration;
 use DoctrineMongoODMModule\Service\DoctrineObjectHydratorFactory;
 
@@ -23,15 +22,15 @@ return [
 
                 'driver'             => 'odm_default',
 
-                'generate_proxies'   => AbstractProxyFactory::AUTOGENERATE_ALWAYS,
+                'generate_proxies'   => Configuration::AUTOGENERATE_FILE_NOT_EXISTS,
                 'proxy_dir'          => 'data/DoctrineMongoODMModule/Proxy',
                 'proxy_namespace'    => 'DoctrineMongoODMModule\Proxy',
 
-                'generate_hydrators' => Configuration::AUTOGENERATE_ALWAYS,
+                'generate_hydrators' => Configuration::AUTOGENERATE_FILE_NOT_EXISTS,
                 'hydrator_dir'       => 'data/DoctrineMongoODMModule/Hydrator',
                 'hydrator_namespace' => 'DoctrineMongoODMModule\Hydrator',
 
-                'generate_persistent_collections' => Configuration::AUTOGENERATE_ALWAYS,
+                'generate_persistent_collections' => Configuration::AUTOGENERATE_FILE_NOT_EXISTS,
                 'persistent_collection_dir' => 'data/DoctrineMongoODMModule/PersistentCollection',
                 'persistent_collection_namespace' => 'DoctrineMongoODMModule\PersistentCollection',
                 'persistent_collection_factory' => null,

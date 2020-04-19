@@ -3,8 +3,7 @@
 namespace DoctrineMongoODMModule\Paginator\Adapter;
 
 use Zend\Paginator\Adapter\AdapterInterface;
-use Doctrine\MongoDB\EagerCursor;
-use Doctrine\ODM\MongoDB\Cursor;
+use Doctrine\ODM\MongoDB\Iterator\Iterator;
 
 /**
  * @license MIT
@@ -14,18 +13,23 @@ use Doctrine\ODM\MongoDB\Cursor;
 class DoctrinePaginator implements AdapterInterface
 {
     /**
-     * @var Cursor
+     * @var Iterator
      */
-    protected $cursor;
+    protected $iterator;
+
+    /**
+     * @var int
+     */
+    private $count;
 
     /**
      * Constructor
      *
-     * @param Cursor $cursor
+     * @param Iterator $iterator
      */
-    public function __construct(Cursor $cursor)
+    public function __construct(Iterator $iterator)
     {
-        $this->cursor = $cursor;
+        $this->iterator = $iterator;
     }
 
     /**
@@ -33,12 +37,11 @@ class DoctrinePaginator implements AdapterInterface
      */
     public function count()
     {
-        // Avoid using EagerCursor::count as this stores a collection without limits to memory
-        if ($this->cursor->getBaseCursor() instanceof EagerCursor) {
-            return $this->cursor->getBaseCursor()->getCursor()->count();
+        if ($this->count === null) {
+            $this->count = count($this->iterator->toArray());
         }
 
-        return $this->cursor->count();
+        return $this->count;
     }
 
     /**
@@ -46,12 +49,7 @@ class DoctrinePaginator implements AdapterInterface
      */
     public function getItems($offset, $itemCountPerPage)
     {
-        $cursor = clone $this->cursor;
-
-        $cursor->recreate();
-        $cursor->skip($offset);
-        $cursor->limit($itemCountPerPage);
         // Return array version so that counting is correct
-        return $cursor->toArray(false);
+        return array_slice($this->iterator->toArray(), $offset, $itemCountPerPage);
     }
 }

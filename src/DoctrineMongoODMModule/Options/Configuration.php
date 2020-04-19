@@ -2,6 +2,7 @@
 namespace DoctrineMongoODMModule\Options;
 
 use Doctrine\Common\Proxy\AbstractProxyFactory;
+use Doctrine\ODM\MongoDB\Configuration as MongoDBConfiguration;
 use Zend\Stdlib\AbstractOptions;
 
 /**
@@ -24,11 +25,11 @@ class Configuration extends AbstractOptions
     protected $metadataCache = 'array';
 
     /**
-     * Automatic generation of proxies (disable for production!)
+     * On the fly generation of proxies (disable for production!)
      *
      * @var bool
      */
-    protected $generateProxies = AbstractProxyFactory::AUTOGENERATE_ALWAYS;
+    protected $generateProxies = MongoDBConfiguration::AUTOGENERATE_EVAL;
 
     /**
      * Proxy directory.
@@ -184,13 +185,21 @@ class Configuration extends AbstractOptions
      * @param int $generateProxies
      * @return $this
      */
-    public function setGenerateProxies($generateProxies)
+    public function setGenerateProxies(int $generateProxies)
     {
-        if (is_bool($generateProxies)) {
-            $generateProxies = $generateProxies ? AbstractProxyFactory::AUTOGENERATE_ALWAYS : AbstractProxyFactory::AUTOGENERATE_NEVER;
+        switch ($generateProxies) {
+            case MongoDBConfiguration::AUTOGENERATE_FILE_NOT_EXISTS:
+            case MongoDBConfiguration::AUTOGENERATE_EVAL:
+                $this->generateProxies = $generateProxies;
+                break;
+
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'Invalid proxy generation strategy given - only %1$s::AUTOGENERATE_FILE_NOT_EXISTS and %1$s::AUTOGENERATE_EVAL are supported.',
+                    MongoDBConfiguration::class
+                ));
         }
 
-        $this->generateProxies = $generateProxies;
         return $this;
     }
 

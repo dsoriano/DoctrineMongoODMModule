@@ -29,11 +29,11 @@ class ConfigurationFactory extends AbstractFactory
 
         $config = new Configuration;
 
-        // logger
-        if ($options->getLogger()) {
-            $logger = $container->get($options->getLogger());
-            $config->setLoggerCallable([$logger, 'log']);
-        }
+//        // logger
+//        if ($options->getLogger()) {
+//            $logger = $container->get($options->getLogger());
+//            $config->setLoggerCallable([$logger, 'log']);
+//        }
 
         // proxies
         $config->setAutoGenerateProxyClasses($options->getGenerateProxies());
@@ -59,14 +59,17 @@ class ConfigurationFactory extends AbstractFactory
         }
 
         // default db
-        $config->setDefaultDB($options->getDefaultDb());
+        $defaultDb = $options->getDefaultDb();
+        if (is_string($defaultDb)) {
+            $config->setDefaultDB($defaultDb);
+        }
 
         // caching
         $config->setMetadataCacheImpl($container->get($options->getMetadataCache()));
 
         // retries
-        $config->setRetryConnect($options->getRetryConnect());
-        $config->setRetryQuery($options->getRetryQuery());
+//        $config->setRetryConnect($options->getRetryConnect());
+//        $config->setRetryQuery($options->getRetryQuery());
 
         // Register filters
         foreach ($options->getFilters() as $alias => $class) {

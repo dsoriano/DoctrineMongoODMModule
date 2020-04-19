@@ -2,8 +2,10 @@
 namespace DoctrineMongoODMModule\Service;
 
 use Doctrine\MongoDB\Connection;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use DoctrineMongoODMModule\Options;
 use Interop\Container\ContainerInterface;
+use MongoDB\Client;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -19,7 +21,7 @@ class ConnectionFactory extends AbstractFactory
     /**
      * {@inheritDoc}
      *
-     * @return Connection
+     * @return Client
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
@@ -69,12 +71,13 @@ class ConnectionFactory extends AbstractFactory
         /** @var $configuration \Doctrine\Common\EventManager */
         $eventManager = $container->get('doctrine.eventmanager.' . $this->getName());
 
-        return new Connection($connectionString, $options->getOptions(), $configuration, $eventManager);
+//        return new Connection($connectionString, $options->getOptions(), $configuration, $eventManager);
+        return new Client($connectionString, [], ['typeMap' => DocumentManager::CLIENT_TYPEMAP]);
     }
 
     public function createService(ServiceLocatorInterface $container)
     {
-        return $this($container, Connection::class);
+        return $this($container, Client::class);
     }
 
     /**
