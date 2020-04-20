@@ -1,8 +1,8 @@
-# Doctrine MongoDB ODM Module for Zend Framework 2
+# Doctrine MongoDB ODM Module for Zend Framework 3
 
 Master: [![Build Status](https://secure.travis-ci.org/doctrine/DoctrineMongoODMModule.png?branch=master)](http://travis-ci.org/doctrine/DoctrineMongoODMModule)
 
-The DoctrineMongoODMModule integrates Doctrine 2 MongoDB ODM with Zend Framework 2
+The DoctrineMongoODMModule integrates Doctrine 2 MongoDB ODM with Zend Framework 3
 quickly and easily. The following features are intended to work out of the box:
 
   - MongoDB support
@@ -12,7 +12,7 @@ quickly and easily. The following features are intended to work out of the box:
   - Doctrine Cli support
 
 ## Requirements
-[Zend Framework 2 Application Skeleton](http://www.github.com/zendframework/ZendSkeletonApplication) (or compatible
+[Zend Framework 3 Application Skeleton](http://www.github.com/zendframework/ZendSkeletonApplication) (or compatible
 architecture)
 
 ## Installation
@@ -28,7 +28,7 @@ Installation of this module uses composer. For composer documentation, please re
      ```json
      {
          "require": {
-             "doctrine/doctrine-mongo-odm-module": "^1.0"
+             "doctrine/doctrine-mongo-odm-module": "^3.0"
          }
      }
      ```
@@ -64,7 +64,7 @@ Access the document manager using the following service manager alias:
 
 ```php
 <?php
-$dm = $this->getServiceLocator()->get('doctrine.documentmanager.odm_default');
+$dm = $container->get('doctrine.documentmanager.odm_default');
 ```
 
 #### Configuration
